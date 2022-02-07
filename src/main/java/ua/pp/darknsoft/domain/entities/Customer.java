@@ -1,4 +1,4 @@
-package ua.pp.darknsoft.entities;
+package ua.pp.darknsoft.domain.entities;
 
 import javax.persistence.*;
 

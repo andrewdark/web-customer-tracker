@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ua.pp.darknsoft.domain.entities.Customer;
 import ua.pp.darknsoft.services.CustomerService;
+
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -14,7 +17,14 @@ public class MainController {
 
     @RequestMapping(value = "/")
     public String index(Model dasModel) {
-        customerService.findAll().stream().forEach(System.out::println);
+
         return "index";
+    }
+
+    @RequestMapping(value = "/customers")
+    public String customers(Model dasModel) {
+        List<Customer> customers = customerService.findAll();
+        dasModel.addAttribute("customers",customers);
+        return "list-customers";
     }
 }

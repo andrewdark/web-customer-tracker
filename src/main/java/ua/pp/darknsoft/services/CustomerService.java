@@ -1,8 +1,8 @@
 package ua.pp.darknsoft.services;
 
 import ua.pp.darknsoft.domain.dto.CustomerDto;
+import ua.pp.darknsoft.domain.entities.Customer;
 import ua.pp.darknsoft.domain.factories.filters.CustomerFilter;
-import ua.pp.darknsoft.entities.Customer;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of customers</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="icon" th:href="@{/images/ok.png}">
+    <script type="text/javascript" th:src="@{/js/vendor/jquery-3.6.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+</head>
+<body>
+<div id="wrapper">
+    <div id="header">
+        <h2>CRM - Customer relationship manager</h2>
+    </div>
+    <table>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+        </tr>
+        <tr th:each="tmpCustomer : ${customers}">
+            <td th:text="${tmpCustomer.firstName}"></td>
+            <td th:text="${tmpCustomer.lastName}"></td>
+            <td th:text="${tmpCustomer.email}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

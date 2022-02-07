@@ -3,17 +3,16 @@ package ua.pp.darknsoft.services;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.pp.darknsoft.domain.dto.CustomerDto;
+import ua.pp.darknsoft.domain.entities.Customer;
 import ua.pp.darknsoft.domain.factories.filters.CustomerFilter;
-import ua.pp.darknsoft.entities.Customer;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional
-public class CustomerServiceImpl implements  CustomerService{
+public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDto create(CustomerDto customerDto) {
@@ -48,7 +47,8 @@ public class CustomerServiceImpl implements  CustomerService{
     @Override
     public List<Customer> findAll() {
 
-        return null;
+        List<Customer> customers = new ArrayList<>();
+        return customers;
     }
 
     @Override

@@ -5,14 +5,22 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.pp.darknsoft.domain.dto.CustomerDto;
 import ua.pp.darknsoft.domain.entities.Customer;
 import ua.pp.darknsoft.domain.factories.filters.CustomerFilter;
+import ua.pp.darknsoft.repositories.CustomerRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
+
+    CustomerRepository customerRepository;
+
+    public CustomerServiceImpl(CustomerRepository customerRepository) {
+       this.customerRepository = customerRepository;
+    }
 
     @Override
     public CustomerDto create(CustomerDto customerDto) {
@@ -47,8 +55,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<Customer> findAll() {
 
-        List<Customer> customers = new ArrayList<>();
-        return customers;
+        return StreamSupport.stream(customerRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -24,6 +24,18 @@ public abstract class RepositoryImpl<T, ID extends Serializable> implements Repo
         this.entityClass = entityClass;
     }
 
+    public Class<T> getEntityClass() {
+        return entityClass;
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
     @Override
     public Optional<T> findById(ID var1) {
         Optional<T> entityOptional = Optional.ofNullable(entityManager.find(entityClass, var1));
@@ -32,7 +44,7 @@ public abstract class RepositoryImpl<T, ID extends Serializable> implements Repo
 
     @Override
     public Iterable<T> findAll() {
-        return null;
+        return getEntityManager().createQuery("from " + getEntityClass().getSimpleName(), getEntityClass()).getResultList();
     }
 
     @Override

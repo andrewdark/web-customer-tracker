@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.pp.darknsoft.domain.dto.CustomerDto;
 import ua.pp.darknsoft.domain.entities.Customer;
+import ua.pp.darknsoft.domain.factories.converters.CustomerDtoToCustomerConverter;
+import ua.pp.darknsoft.domain.factories.converters.CustomerToCustomerDtoConverter;
 import ua.pp.darknsoft.domain.factories.filters.CustomerFilter;
 import ua.pp.darknsoft.repositories.CustomerRepository;
 
@@ -16,10 +18,10 @@ import java.util.stream.StreamSupport;
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
 
-    CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
 
     public CustomerServiceImpl(CustomerRepository customerRepository) {
-       this.customerRepository = customerRepository;
+        this.customerRepository = customerRepository;
     }
 
     @Override
@@ -28,8 +30,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void addInterviewer(CustomerDto customerDto) {
-
+    public void addCustomer(CustomerDto customerDto) {
+        customerRepository.save(CustomerDtoToCustomerConverter.INSTANCE.convert(customerDto));
     }
 
     @Override
@@ -53,10 +55,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<Customer> findAll() {
-
-        return StreamSupport.stream(customerRepository.findAll().spliterator(), false)
+    public List<CustomerDto> findAll() {
+        List<Customer> customers = StreamSupport.stream(customerRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
+        return customers.stream().map(CustomerToCustomerDtoConverter.INSTANCE::convert).collect(Collectors.toList());
     }
 
     @Override

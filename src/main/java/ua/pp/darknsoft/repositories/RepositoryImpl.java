@@ -54,7 +54,6 @@ public abstract class RepositoryImpl<T, ID extends Serializable> implements Repo
 
     @Override
     public <S extends T> S save(S var1) {
-
         return entityManager.merge(var1);
     }
 

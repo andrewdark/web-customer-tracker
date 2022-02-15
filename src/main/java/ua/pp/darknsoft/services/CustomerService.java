@@ -1,7 +1,6 @@
 package ua.pp.darknsoft.services;
 
 import ua.pp.darknsoft.domain.dto.CustomerDto;
-import ua.pp.darknsoft.domain.entities.Customer;
 import ua.pp.darknsoft.domain.factories.filters.CustomerFilter;
 
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.Optional;
 public interface CustomerService {
     CustomerDto create(CustomerDto customerDto);
 
-    void addInterviewer(CustomerDto customerDto);
+    void addCustomer(CustomerDto customerDto);
 
     Optional<CustomerDto> findById(Long id);
 
@@ -20,7 +19,7 @@ public interface CustomerService {
 
     Boolean isExist(CustomerDto interviewDto);
 
-    List<Customer> findAll();
+    List<CustomerDto> findAll();
 
     void deleteById(Long id);
 }

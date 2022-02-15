@@ -17,7 +17,6 @@ import java.util.Optional;
 public abstract class RepositoryImpl<T, ID extends Serializable> implements Repository<T, ID> {
     private final Class<T> entityClass;
 
-    @PersistenceContext
     private EntityManager entityManager;
 
     public RepositoryImpl(Class<T> entityClass) {
@@ -32,6 +31,7 @@ public abstract class RepositoryImpl<T, ID extends Serializable> implements Repo
         return entityManager;
     }
 
+    @PersistenceContext
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }

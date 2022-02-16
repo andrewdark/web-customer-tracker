@@ -29,9 +29,11 @@
                     <th>Email</th>
                 </tr>
                 <tr th:each="tmpCustomer : ${customers}">
+
                     <td th:text="${tmpCustomer.firstName}"></td>
                     <td th:text="${tmpCustomer.lastName}"></td>
                     <td th:text="${tmpCustomer.email}"></td>
+                    <td><a th:href="@{/showFormForUpdate/{id}(id=${tmpCustomer.id})}">update</a></td>
                 </tr>
             </table>
         </div>

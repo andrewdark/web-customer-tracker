@@ -19,8 +19,9 @@
     <div id="container">
         <h3>Save customer</h3>
 
-            <!--/*@thymesVar id="customer" type="ua.pp.darknsoft.domain.entities.Customer"*/-->
+            <!--/*@thymesVar id="customer" type="ua.pp.darknsoft.domain.dto.CustomerDto"*/-->
             <form action="#" th:action="@{/saveCustomer}" th:object="${customer}"  method="post">
+                <input type="hidden" th:field="*{id}" />
                 <table>
                     <tbody>
                     <tr>

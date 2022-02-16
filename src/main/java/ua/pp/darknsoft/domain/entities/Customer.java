@@ -2,10 +2,11 @@ package ua.pp.darknsoft.domain.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "customer", uniqueConstraints = {@UniqueConstraint(name = "UC_CANDIDATE_EMAIL", columnNames = "email")})
-public class Customer {
+public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_generator")
     @SequenceGenerator(name="customer_generator", sequenceName = "customer_seq", allocationSize=50)

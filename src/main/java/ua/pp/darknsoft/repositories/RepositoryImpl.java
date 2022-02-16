@@ -58,6 +58,17 @@ public abstract class RepositoryImpl<T, ID extends Serializable> implements Repo
     }
 
     @Override
+    public void refresh(T var1) {
+        entityManager.refresh(var1);
+    }
+
+    @Override
+    public T getReference(ID var1) {
+        return entityManager.getReference(getEntityClass(), var1);
+    }
+
+
+    @Override
     public <S extends T> S saveAndFlush(S var1) {
         return null;
     }

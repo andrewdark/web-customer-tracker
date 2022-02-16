@@ -2,12 +2,8 @@ package ua.pp.darknsoft.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ua.pp.darknsoft.domain.dto.CustomerDto;
-import ua.pp.darknsoft.domain.entities.Customer;
 import ua.pp.darknsoft.services.CustomerService;
 
 import java.util.List;
@@ -37,7 +33,7 @@ public class MainController {
     @GetMapping(value = "/showFormForAdd")
     public String showFormForAdd(Model dasModel) {
         //Create model attribute to bind form data
-        Customer theCustomer = new Customer();
+        CustomerDto theCustomer = new CustomerDto();
         dasModel.addAttribute("customer", theCustomer);
         return "customer-form";
     }
@@ -49,5 +45,15 @@ public class MainController {
         return "redirect:/customers";
     }
 
+    @GetMapping(value = "/showFormForUpdate/{id}")
+    public String showFormForUpdate(@PathVariable("id") Long id, Model dasModel) {
+        //Create model attribute to bind form data
+        CustomerDto theCustomer = customerService.findById(id).orElse(null);
+       if(theCustomer==null){
+           return "redirect:/customers";
+       }
+        dasModel.addAttribute("customer", theCustomer);
+        return "customer-form";
+    }
 
 }

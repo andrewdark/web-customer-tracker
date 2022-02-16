@@ -29,6 +29,10 @@ public interface Repository<T, ID> {
 
     void flush();
 
+    void refresh(T var1);
+
+    T getReference(ID var1);
+
     List<T> query(Specification<T> specification);
 
 }

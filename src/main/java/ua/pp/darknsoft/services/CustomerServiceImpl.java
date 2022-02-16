@@ -31,12 +31,24 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void addCustomer(CustomerDto customerDto) {
-        customerRepository.save(CustomerDtoToCustomerConverter.INSTANCE.convert(customerDto));
+
+        Customer customer = CustomerDtoToCustomerConverter.INSTANCE.convert(customerDto);
+        if (customer != null && customer.getId() != null) {
+            Customer oldCustomer = new Customer();
+            oldCustomer.setId(customer.getId());
+            oldCustomer = customerRepository.getReference(customer.getId());
+            oldCustomer.setFirstName(customer.getFirstName());
+            oldCustomer.setLastName(customer.getLastName());
+            oldCustomer.setEmail(customer.getEmail());
+            customer = oldCustomer;
+        }
+        customerRepository.save(customer);
     }
 
     @Override
     public Optional<CustomerDto> findById(Long id) {
-        return Optional.empty();
+        Customer customer = customerRepository.findById(id).orElse(null);
+        return Optional.ofNullable(CustomerToCustomerDtoConverter.INSTANCE.convert(customer));
     }
 
     @Override

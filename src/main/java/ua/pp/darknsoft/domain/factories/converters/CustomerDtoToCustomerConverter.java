@@ -9,6 +9,10 @@ public enum CustomerDtoToCustomerConverter implements Converter<CustomerDto, Cus
 
     @Override
     public Customer convert(CustomerDto source) {
+        if (source == null) {
+            return null;
+        }
+
         Customer customer = new Customer(
                 source.getId(),
                 source.getFirstName(),

@@ -56,4 +56,10 @@ public class MainController {
         return "customer-form";
     }
 
+    @GetMapping(value = "/delete")
+    public String delete(@RequestParam(value = "id", required = true) Long id, Model dasModel) {
+
+        return "redirect:/customers";
+    }
+
 }

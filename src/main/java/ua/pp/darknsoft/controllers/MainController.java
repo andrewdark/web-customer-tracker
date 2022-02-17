@@ -49,16 +49,16 @@ public class MainController {
     public String showFormForUpdate(@PathVariable("id") Long id, Model dasModel) {
         //Create model attribute to bind form data
         CustomerDto theCustomer = customerService.findById(id).orElse(null);
-       if(theCustomer==null){
-           return "redirect:/customers";
-       }
+        if (theCustomer == null) {
+            return "redirect:/customers";
+        }
         dasModel.addAttribute("customer", theCustomer);
         return "customer-form";
     }
 
     @GetMapping(value = "/delete")
     public String delete(@RequestParam(value = "id", required = true) Long id, Model dasModel) {
-
+        customerService.deleteById(id);
         return "redirect:/customers";
     }
 
